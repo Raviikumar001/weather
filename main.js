@@ -12,7 +12,11 @@ const getCurrentWeatherData= async ()=>{
 }
 
 
-const loadCurrentForecast = ({main: {temp, temp_max, temp_min, weather:}})
+const loadCurrentForecast = ({main: {temp, temp_max, temp_min, weather:[{description}]}}) =>{
+
+  const currentForecastElement =   document.querySelector('#current-forecast');
+   currentForecastElement.querySelector(".temp");
+}
 
 document.addEventListener('DOMContentLoaded', async ()=>{
      const currentWeather =  getCurrentWeatherData();
