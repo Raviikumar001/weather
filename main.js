@@ -64,6 +64,12 @@ const getHourlyForecast = async({name: city})=>{
 
  }
 
+ 
+ const loadFiveDayForecast = (hourlyForecast)=>{
+
+    console.log(hourlyForecast)
+ }
+
 
  const loadFeelsLike = ({main: {feels_like}})=>{
   let container =  document.querySelector("#feel-like");
@@ -85,6 +91,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
      
      const hourlyForecast = await  getHourlyForecast(currentWeather)
      loadHourlyForecast(hourlyForecast) 
+     loadFiveDayForecast(hourlyForecast);
      loadFeelsLike(currentWeather);
      loadHumidity(currentWeather);
 })
