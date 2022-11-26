@@ -150,6 +150,9 @@ body {
     opacity: 50%;
 }
 
+.five-day-forecast-container .day-wise-forecast .max-temp{
+    justify-self: end;
+}
 
 
 .five-day-forecast-container .day-wise-forecast .icon{
@@ -157,7 +160,11 @@ body {
     height: 75px;
 }
 
+.five-day-forecast-container .day-wise-forecast  .day{
 
+    text-transform: capitalize;
+    justify-self: start ;
+}
 
 
 
