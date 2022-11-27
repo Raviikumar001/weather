@@ -70,7 +70,7 @@ const loadHourlyForecast = ({name, main: {temp: temp_now}, weather: [{icon: icon
    </article>`;
   for (let { temp, icon, dt_txt } of dataFor12Hours) {
     innerHtmlString += `<article >
-      <h3 class="time">${dt_txt.split(" ")[1]}</h3>
+      <h3 class="time">${timeFormatter.format(new Date(dt_txt))}</h3>
       <img class="icon" src="${createIconUrl(icon)}"/>
       <p class="hourly-temp">${formatTemperature(temp)}</p>
        </article>`;
@@ -147,6 +147,8 @@ const loadHumidity = ({ main: { humidity } }) => {
   let container = document.querySelector("#humidity");
   container.querySelector(".humidity-value").textContent = `${humidity} %`;
 };
+
+
 
 document.addEventListener("DOMContentLoaded", async () => {
   const currentWeather = await getCurrentWeatherData();
