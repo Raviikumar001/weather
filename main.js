@@ -2,6 +2,11 @@ const API_KEY = "d70119e45ddd9f3893ca56fc14fcb2cb";
 
 const DAYS_OF_THE_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thrus", "Fri", "Sat"];
 
+const  getCitiesGeoLocation = async (searchText)=>{
+ const response = await fetch(`http://api.openweathermap.org/geo/1.0/direct?q=${searchText}&limits=5&appid=${API_KEY}`);
+ 
+ return response.json();
+}
 const getCurrentWeatherData = async () => {
   const city = "pune";
 
@@ -148,9 +153,38 @@ const loadHumidity = ({ main: { humidity } }) => {
   container.querySelector(".humidity-value").textContent = `${humidity} %`;
 };
 
+function debounce (func){
+  let timer;
 
+  return (...args)=>
+  {
+    clearTimeout(timer);
+    timer=  setTimeout( ()=> {
+      func.apply(this, args);
+    }, 500);
+  }
+}
+
+const onSearch = async (event)=>{
+ let value = event.target.value;
+
+  const listOfCities= await getCitiesGeoLocation(value);
+  let options = '';
+  for ({lat, lon, name, state, country }of listOfCities){
+
+    options += `<option data-city-details='${JSON.stringify({ lat, lon, name})}' value="${name} , ${state}, ${country}"></option>`
+
+  }
+  document.querySelector('#cities').innerHTML = options;
+  console.log(listOfCities); 
+}
+
+const debounceSearch =  debounce( (event) => onSearch(event))
 
 document.addEventListener("DOMContentLoaded", async () => {
+
+ const search =  document.querySelector("#search");
+ search.addEventListener('input',debounceSearch);
   const currentWeather = await getCurrentWeatherData();
   loadCurrentForecast(currentWeather);
 
