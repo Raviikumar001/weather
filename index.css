@@ -3,6 +3,7 @@
   box-sizing: border-box;
 }
 
+
 :root{
 
 
@@ -34,9 +35,11 @@ body {
   font-family: Arial, Helvetica, sans-serif;
   max-width: 800px;
   margin: var(--spacing-regular) auto;
+  background-image: url('./sky.jpg');
 }
 
 .container {
+    background-color: #eed8f6;
   display: grid;
   grid-template-columns: repeat(2, fr);
   grid-template-areas:
@@ -51,7 +54,7 @@ body {
 }
 
 .container, .container > article {
-    border: 1px solid;
+    border: 2px solid #2D033B;
     border-radius: var(--spacing-regular);
     padding: var(--spacing-regular);
 }
@@ -63,6 +66,12 @@ body {
      border-radius: var(--font-small);
     padding: var(--spacing-regular);
      
+
+
+}
+
+.container #cities  option{
+
 
 
 }
