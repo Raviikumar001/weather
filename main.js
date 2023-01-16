@@ -1,4 +1,5 @@
 const API_KEY = "d70119e45ddd9f3893ca56fc14fcb2cb";
+//days of the week constants
 
 const DAYS_OF_THE_WEEK = ["Sun", "Mon", "Tue", "Wed", "Thrus", "Fri", "Sat"];
 
@@ -6,6 +7,7 @@ let selectedCityText;
 let selectedCity;
 
 
+//get city name through geo location.
 const  getCitiesGeoLocation = async (searchText)=>{
  const response = await fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${searchText}&appid=${API_KEY}`);
  
@@ -21,6 +23,8 @@ const getCurrentWeatherData = async ({lat,lon,name: city}) => {
   return response.json();
 };
 
+
+//code to get hourly forecast.
 const getHourlyForecast = async ({ name: city }) => {
   const response = await fetch(
     `https://api.openweathermap.org/data/2.5/forecast?q=${city}&appid=${API_KEY}&units=metric`
@@ -67,6 +71,8 @@ const loadCurrentForecast = ({
   )}`;
 };
 
+
+//for loading hourly forecast.
 const loadHourlyForecast = ({name, main: {temp: temp_now}, weather: [{icon: iconNow}]}  ,hourlyForecast) => {
  const timeFormatter =  Intl.DateTimeFormat("en", {hour12: true, hour: "numeric"})
    let dataFor12Hours = hourlyForecast.slice(2, 14);
@@ -87,6 +93,8 @@ const loadHourlyForecast = ({name, main: {temp: temp_now}, weather: [{icon: icon
   hourlyContainer.innerHTML = innerHtmlString;
 };
 
+
+//calculating day wise forecast.
 const calculateDayWiseForecast = (hourlyForecast) => {
   let dayWiseForecast = new Map();
   for (let forecast of hourlyForecast) {
