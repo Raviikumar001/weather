@@ -48,6 +48,7 @@ const getHourlyForecast = async ({ name: city }) => {
     };
   });
 };
+//fuction for formating temperature
 const formatTemperature = (temp) => `${temp?.toFixed(1)}°`;
 
 const createIconUrl = (icon) =>
